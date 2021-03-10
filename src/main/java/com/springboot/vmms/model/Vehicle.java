@@ -11,11 +11,11 @@ public class Vehicle {
     private String engi_no;
     private String color;
     private String reg_date;
+    @Id
     private String reg_no;
     private String odo_read;
     private String yr_manu;
     private String fuel_type;
-    @Id
     private String user_id;
 
     public Vehicle() {
