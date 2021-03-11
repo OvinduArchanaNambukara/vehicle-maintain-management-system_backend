@@ -19,14 +19,20 @@ public class VehicleController {
     public List<Vehicle> getVehicleById(@PathVariable String id) {
         return vehicleRepository.findByUserId(id);
     }
+
+    @GetMapping(path = "/{id}/{regNo}")
+    public Vehicle getVehicleDetails(@PathVariable String id, @PathVariable String regNo) {
+        return vehicleRepository.findByUserIdAndRegNo(id, regNo);
+    }
+
     @GetMapping(path = "/all")
-    public List<Vehicle> getVehicleList(){
+    public List<Vehicle> getVehicleList() {
         return vehicleRepository.findAll();
     }
 
     @PostMapping(path = "create")
-    public Vehicle createVehicle(@RequestBody Vehicle vehicleDetails){
-        Vehicle vehicle=vehicleRepository.save(vehicleDetails);
+    public Vehicle createVehicle(@RequestBody Vehicle vehicleDetails) {
+        Vehicle vehicle = vehicleRepository.save(vehicleDetails);
         return vehicle;
     }
 
