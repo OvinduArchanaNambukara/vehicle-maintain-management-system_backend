@@ -1,10 +1,11 @@
 package com.springboot.vmms.controller;
 
-
 import com.springboot.vmms.model.Vehicle;
 import com.springboot.vmms.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin("http://localhost:4200")
 @RestController
@@ -15,9 +16,12 @@ public class VehicleController {
     private VehicleRepository vehicleRepository;
 
     @GetMapping(path = "/{id}")
-    public Vehicle getVehicleById(@PathVariable String id) {
-        Vehicle vehicle = vehicleRepository.findById(id).orElseThrow();
-        return vehicle;
+    public List<Vehicle> getVehicleById(@PathVariable String id) {
+        return vehicleRepository.findByUserId(id);
+    }
+    @GetMapping(path = "/all")
+    public List<Vehicle> getVehicleList(){
+        return vehicleRepository.findAll();
     }
 
     @PostMapping(path = "create")
