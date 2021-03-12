@@ -52,4 +52,11 @@ public class VehicleController {
         Vehicle updatedVehicle = vehicleRepository.save(vehicle);
         return updatedVehicle;
     }
+
+    @DeleteMapping(path = "/{id}/{regNo}/delete")
+    public Vehicle deleteVehicle(@PathVariable String id,@PathVariable String regNo){
+        Vehicle vehicle=vehicleRepository.findByUserIdAndRegNo(id,regNo);
+        vehicleRepository.delete(vehicle);
+        return vehicle;
+    }
 }
