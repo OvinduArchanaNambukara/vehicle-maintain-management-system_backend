@@ -36,4 +36,20 @@ public class VehicleController {
         return vehicle;
     }
 
+    @PutMapping(path = "/{id}/{regNo}/update")
+    public Vehicle updateVehicle(@PathVariable String id, @PathVariable String regNo, @RequestBody Vehicle vehicleDetails) {
+        Vehicle vehicle = vehicleRepository.findByUserIdAndRegNo(id, regNo);
+
+        vehicle.setChassisNo(vehicleDetails.getChassisNo());
+        vehicle.setColor(vehicleDetails.getColor());
+        vehicle.setEngiNo(vehicleDetails.getEngiNo());
+        vehicle.setFuelType(vehicleDetails.getFuelType());
+        vehicle.setOdoRead(vehicleDetails.getOdoRead());
+        vehicle.setVehiMake(vehicleDetails.getVehiMake());
+        vehicle.setVehiModel(vehicleDetails.getVehiModel());
+        vehicle.setYrManu(vehicleDetails.getYrManu());
+
+        Vehicle updatedVehicle = vehicleRepository.save(vehicle);
+        return updatedVehicle;
+    }
 }
