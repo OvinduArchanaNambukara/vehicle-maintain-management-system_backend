@@ -20,9 +20,26 @@ public class CustomerController {
     }
 
     @PostMapping(path = "create")
-    public Customer createCustomer(@RequestBody Customer customerDetails){
-        Customer customer=customerRepository.save(customerDetails);
+    public Customer createCustomer(@RequestBody Customer customerDetails) {
+        Customer customer = customerRepository.save(customerDetails);
         return customer;
+    }
+
+    @PutMapping(path = "/{id}/update")
+    public Customer updateCustomer(@PathVariable String id, @RequestBody Customer customerDetails) {
+        Customer customer = customerRepository.findById(id).orElseThrow();
+        customer.setFirstName(customerDetails.getFirstName());
+        customer.setLastName(customerDetails.getLastName());
+        customer.setAddress(customerDetails.getAddress());
+        customer.setCity(customerDetails.getCity());
+        customer.setEmail(customerDetails.getEmail());
+        customer.setNationalId(customerDetails.getNationalId());
+        customer.setProvince(customerDetails.getProvince());
+        customer.setZip(customerDetails.getZip());
+        customer.setTelephone(customerDetails.getTelephone());
+
+        Customer updatedCustomer = customerRepository.save(customer);
+        return updatedCustomer;
     }
 
 }
