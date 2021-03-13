@@ -54,9 +54,17 @@ public class VehicleController {
     }
 
     @DeleteMapping(path = "/{id}/{regNo}/delete")
-    public Vehicle deleteVehicle(@PathVariable String id,@PathVariable String regNo){
-        Vehicle vehicle=vehicleRepository.findByUserIdAndRegNo(id,regNo);
+    public Vehicle deleteVehicle(@PathVariable String id, @PathVariable String regNo) {
+        Vehicle vehicle = vehicleRepository.findByUserIdAndRegNo(id, regNo);
         vehicleRepository.delete(vehicle);
         return vehicle;
     }
+
+    @DeleteMapping(path = "/{id}/deleteAll")
+    public List<Vehicle> deleteAllVehicleOwnByCustomer(@PathVariable String id) {
+        List<Vehicle> vehicles = vehicleRepository.findAllByUserId(id);
+        vehicleRepository.deleteAll(vehicles);
+        return vehicles;
+    }
+
 }

@@ -42,4 +42,10 @@ public class CustomerController {
         return updatedCustomer;
     }
 
+    @DeleteMapping(path = "/{id}/delete")
+    public Customer deleteCustomer(@PathVariable String id) {
+        Customer customer = customerRepository.findById(id).orElseThrow();
+        customerRepository.delete(customer);
+        return customer;
+    }
 }
